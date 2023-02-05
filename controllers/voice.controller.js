@@ -90,7 +90,7 @@ const respond = async (req, res) => {
     }
   }
 
-  res.send(twiml.toString());
+  // res.send(twiml.toString());
 };
 
 async function generateResponse(prompt) {
