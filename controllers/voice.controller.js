@@ -1,4 +1,10 @@
 const { VoiceResponse } = require("twilio").twiml;
+const { Configuration, OpenAIApi } = require("openai");
+
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+const openai = new OpenAIApi(configuration);
 
 const post = async (req, res) => {
   // Use the Twilio Node.js SDK to build an XML response
@@ -47,6 +53,7 @@ const welcome = async (req, res) => {
 
 const respond = async (req, res) => {
   const twiml = new VoiceResponse();
+  console.log(req.body);
   console.log(req.params);
   const response = await generateResponse(req.params.prompt);
   twiml.say(response);
