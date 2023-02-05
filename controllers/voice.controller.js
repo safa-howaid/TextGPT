@@ -27,8 +27,7 @@ const welcome = async (req, res) => {
   });
 
   gather.say("Hello! Welcome to the information hotline! What is your question?");
-  console.log(gather.toString());
-  console.log(twiml.toString());
+  console.log("VOICE BOT SAYS: " + gather.toString() + "\n");
   // while (twiml.toString().trim() == "") {
   //   twiml.say("I'm sorry, I didn't catch that. What is your question?", { loop: 3 });
   //   twiml.gather({
@@ -54,7 +53,7 @@ const welcome = async (req, res) => {
 const respond = async (req, res) => {
   const twiml = new VoiceResponse();
   const prompt = req.body["SpeechResult"];
-
+  console.log("USER ASKED: " + prompt + "\n");
   try {
     const response = await generateResponse(prompt);
     twiml.say(response);
@@ -95,7 +94,7 @@ const respond = async (req, res) => {
 
 async function generateResponse(prompt) {
   const apiResponse = await openai.createCompletion({
-    model: "text-curie-001",
+    model: "text-davinci-003",
     prompt: prompt,
     max_tokens: 3000,
     temperature: 0.8,
