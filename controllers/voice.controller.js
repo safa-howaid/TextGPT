@@ -1,4 +1,14 @@
-const VoiceResponse = require("twilio").twiml.VoiceResponse;
+const { VoiceResponse } = require("twilio").twiml;
+
+const post = async (req, res) => {
+  // Use the Twilio Node.js SDK to build an XML response
+  const twiml = new VoiceResponse();
+  twiml.say({ voice: "alice" }, "hello world!");
+
+  // Render the response as XML in reply to the webhook request
+  res.type("text/xml");
+  res.send(twiml.toString());
+};
 
 const welcome = async (req, res) => {
   const twiml = new VoiceResponse();
@@ -31,7 +41,7 @@ const welcome = async (req, res) => {
     `/respond?${params}`
   );
 
-  return twiml.toString();
+  res.send(twiml.toString());
 };
 
 const respond = async (req, res) => {
@@ -63,7 +73,7 @@ const respond = async (req, res) => {
   twiml.say("Good bye!");
   twiml.hangup();
 
-  return twiml.toString();
+  res.send(twiml.toString());
 };
 
 async function generateResponse(prompt) {
@@ -77,6 +87,7 @@ async function generateResponse(prompt) {
 }
 
 module.exports = {
+  post,
   welcome,
   respond,
 };
