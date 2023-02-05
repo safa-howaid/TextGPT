@@ -17,7 +17,7 @@ const post = async (req, res) => {
     try {
       const response = await openai.createCompletion({
         model: "text-davinci-003",
-        model: "text-ada-001",
+        // model: "text-ada-001",
         prompt: userRequest,
         temperature: 0.5,
       });

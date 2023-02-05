@@ -53,34 +53,42 @@ const welcome = async (req, res) => {
 
 const respond = async (req, res) => {
   const twiml = new VoiceResponse();
-  console.log(req.body);
-  console.log(req.params);
-  console.log("SPEECH RESULT: " + req.body["SpeechResult"]);
-  const response = await generateResponse(req.body["SpeechResult"]);
-  twiml.say(response);
+  const prompt = req.body["SpeechResult"];
 
-  twiml.say(
-    "If you would like me to repeat the response, press 1. " + "If you would like to ask another question, press 2."
-  );
-
-  const gather = twiml.gather({
-    numDigits: "1",
-  });
-
-  console.log(gather.toString());
-
-  if (gather.toString() == 1) {
+  try {
+    const response = await generateResponse(prompt);
     twiml.say(response);
     twiml.say(
       "If you would like me to repeat the response, press 1. " + "If you would like to ask another question, press 2."
     );
-  } else if (gather.toString() == 2) {
-    twiml.redirect("/voice/welcome");
-  } else {
-    twiml.say("Invalid option.");
+    const gather = twiml.gather({
+      numDigits: "1",
+    });
+
+    console.log(gather.toString());
+
+    if (gather.toString() == 1) {
+      twiml.say(response);
+      twiml.say(
+        "If you would like me to repeat the response, press 1. " + "If you would like to ask another question, press 2."
+      );
+    } else if (gather.toString() == 2) {
+      twiml.redirect("/voice/welcome");
+    } else {
+      twiml.say("Invalid option.");
+    }
+    twiml.say("Good bye!");
+    twiml.hangup();
+    res.type("text/xml").send(twiml.toString());
+  } catch (error) {
+    if (error.response) {
+      console.error(error.response.status, error.response.data);
+      res.type("text/xml").send(twiml.toString());
+    } else {
+      console.error(`Error with OpenAI API request: ${error.message}`);
+      res.type("text/xml").send(twiml.toString());
+    }
   }
-  twiml.say("Good bye!");
-  twiml.hangup();
 
   res.send(twiml.toString());
 };
