@@ -55,7 +55,8 @@ const respond = async (req, res) => {
   const twiml = new VoiceResponse();
   console.log(req.body);
   console.log(req.params);
-  const response = await generateResponse(req.params.prompt);
+  console.log("SPEECH RESULT: " + req.body["SpeechResult"]);
+  const response = await generateResponse(req.body["SpeechResult"]);
   twiml.say(response);
 
   twiml.say(
