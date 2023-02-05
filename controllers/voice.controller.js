@@ -17,7 +17,7 @@ const welcome = async (req, res) => {
     speechTimeout: "auto",
     speechModel: "phone_call",
     input: "speech",
-    action: `/respond`,
+    action: `/voice/respond`,
   });
 
   gather.say("Hello! Welcome to the information hotline! What is your question?");
