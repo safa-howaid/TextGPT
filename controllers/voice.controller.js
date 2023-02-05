@@ -60,23 +60,24 @@ const respond = async (req, res) => {
     twiml.say(
       "If you would like me to repeat the response, press 1. " + "If you would like to ask another question, press 2."
     );
-    const gather = twiml.gather({
-      numDigits: "1",
-    });
+    // const gather = twiml.gather({
+    //   numDigits: "1",
+    // });
 
-    console.log(gather.toString());
+    // console.log(gather.toString());
 
-    if (gather.toString() == 1) {
-      twiml.say(response);
-      twiml.say(
-        "If you would like me to repeat the response, press 1. " + "If you would like to ask another question, press 2."
-      );
-    } else if (gather.toString() == 2) {
-      twiml.redirect("/voice/welcome");
-    } else {
-      twiml.say("Invalid option.");
-    }
-    twiml.say("Good bye!");
+    // if (gather.toString() == 1) {
+    //   twiml.say(response);
+    //   twiml.say(
+    //     "If you would like me to repeat the response, press 1. " + "If you would like to ask another question, press 2."
+    //   );
+    // } else if (gather.toString() == 2) {
+    //   twiml.redirect("/voice/welcome");
+    // } else {
+    //   twiml.say("Invalid option.");
+    // }
+    twiml.pause();
+    twiml.say("Thank you for using our service. Good bye!");
     twiml.hangup();
     res.type("text/xml").send(twiml.toString());
   } catch (error) {
