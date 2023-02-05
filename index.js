@@ -13,6 +13,10 @@ app.use(morgan("dev"));
 const smsRouter = require("./routes/sms.routes");
 app.use("/sms", smsRouter);
 
+// Add voice router
+const voiceRouter = require("./routes/voice.routes");
+app.use("/voice", voiceRouter);
+
 app.listen(PORT, () => {
   console.log(`Express server listening on port ${PORT}`);
 });
