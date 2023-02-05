@@ -12,9 +12,7 @@ const post = async (req, res) => {
 
 const welcome = async (req, res) => {
   const twiml = new VoiceResponse();
-  twiml.say("Hello! Welcome to the information hotline! What is your question?", { loop: 3 });
-
-  twiml.gather({
+  const gather = twiml.gather({
     // enhanced: "true",
     speechTimeout: "auto",
     speechModel: "phone_call",
@@ -22,24 +20,27 @@ const welcome = async (req, res) => {
     // action: `/respond?${params}`,
   });
 
-  while (twiml.toString().trim() == "") {
-    twiml.say("I'm sorry, I didn't catch that. What is your question?", { loop: 3 });
-    twiml.gather({
-      // enhanced: "true",
-      speechTimeout: "auto",
-      speechModel: "phone_call",
-      input: "speech",
-      // action: `/respond?${params}`,
-    });
-  }
+  gather.say("Hello! Welcome to the information hotline! What is your question?");
+  console.log(gather.toString());
+  console.log(twiml.toString());
+  // while (twiml.toString().trim() == "") {
+  //   twiml.say("I'm sorry, I didn't catch that. What is your question?", { loop: 3 });
+  //   twiml.gather({
+  //     // enhanced: "true",
+  //     speechTimeout: "auto",
+  //     speechModel: "phone_call",
+  //     input: "speech",
+  //     // action: `/respond?${params}`,
+  //   });
+  // }
 
-  const params = new URLSearchParams({ prompt: twiml.toString() });
-  twiml.redirect(
-    {
-      method: "POST",
-    },
-    `/respond?${params}`
-  );
+  // const params = new URLSearchParams({ prompt: twiml.toString() });
+  // twiml.redirect(
+  //   {
+  //     method: "POST",
+  //   },
+  //   `/respond?${params}`
+  // );
 
   res.send(twiml.toString());
 };
