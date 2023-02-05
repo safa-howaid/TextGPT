@@ -1,4 +1,4 @@
-# TextGPT!
+# TextGPT
 Answer pressing questions without internet! Want to try out the service? Try texting the number: +1 (385) 831-6656!
 ![textgpt1 (2)](https://user-images.githubusercontent.com/38355190/216830138-e1a75d2b-425c-4551-999e-780fcf94d763.png)
 
