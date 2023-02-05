@@ -1,7 +1,6 @@
 # TextGPT!
-[textgpt1 (2)](https://user-images.githubusercontent.com/38355190/216830098-9be6e67f-3dfb-446e-ab9f-1c49e1e858f2.png)
-
 Answer pressing questions without internet! Want to try out the service? Try texting the number: +1 (385) 831-6656!
+
 ## Inspiration
 OpenAI's ChatGPT has taken the world by storm since it has been released and has already changed the way many of us use the internet. This project was born out of some conversations we had about how powerful this new technology is at summing up huge amounts of data into consumable, summarized points. 
 
